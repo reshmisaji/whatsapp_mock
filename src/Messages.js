@@ -28,6 +28,7 @@ class Messages extends React.Component {
     super(props);
     this.state = { messages: [] };
     this.user = props.name;
+    this.getSender = this.getSender.bind(this);
   }
   componentDidMount() {
     this.timer = setInterval(() => this.getMessages(), 500);
@@ -55,11 +56,17 @@ class Messages extends React.Component {
       });
   }
 
+  getSender(user) {
+    return this.user === user ? "CURRENT" : "OTHER";
+  }
+
   render() {
     document.getElementById("root").style.backgroundColor = "rgb(43,186,162)";
     const messages = this.state.messages.map(message => {
+      let sender = this.getSender(message.name);
+      console.log(sender);
       return (
-        <Message>
+        <Message user={sender}>
           <Sender>{message.name}</Sender>
           <TextMessage>
             <Text>{message.text} </Text>

@@ -68,6 +68,8 @@ export const Conversation = styled.div`
   border-radius: 5px;
   background-color: rgb(236, 229, 221);
   overflow: scroll;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Send = styled.button`
@@ -99,16 +101,18 @@ export const Message = styled.div`
   width: fit-content;
   max-width: 80%;
   min-width: 30%;
-  min-height: 30px;
-  margin: 5px 0px 5px 10px;
+  margin-top: 5px;
+  margin-left: ${props => (props.user === "CURRENT" ? "0px" : "10px")};
+  margin-right: ${props => (props.user === "CURRENT" ? "10px" : "0px")};
   border-radius: 5px;
   border: 1px solid rgb(218, 235, 236);
   background-color: white;
+  align-self: ${props =>
+    props.user === "CURRENT" ? "flex-end" : "flex-start"};
 `;
 
 export const Sender = styled.div`
   width: 100%;
-  height: 10%;
   font-size: 13px;
   font-weight: bold;
 `;
@@ -128,8 +132,6 @@ export const TextMessage = styled.div`
 `;
 
 export const Text = styled.span`
-  width: 90%;
-  height: 80%;
   word-break: break-all;
 `;
 
